@@ -5,6 +5,14 @@
     name = "Bas Bossink";
     email = "bas.bossink@gmail.com";
   in {
+  fonts.fontconfig = {
+    enable = true;
+    defaultFonts = {
+      monospace = [ "JetBrainsMono Nerd Font" ];
+      serif = [ "DejaVu Serif" ];
+      sansSerif = [ "DejaVu Sans" ];
+    };
+  };
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "bas";
@@ -67,6 +75,8 @@
     neovim
     nerdfonts
     nload
+    noto-fonts
+    noto-fonts-color-emoji
     pandoc
     pass
     pijul
@@ -284,6 +294,7 @@
   
   programs.kitty = {
     enable = true;
+    font.name = "JetBrainsMono Nerd Font";
     theme = "Gruvbox Material Dark Hard";
     settings = { 
       cursor_shape = "block";
