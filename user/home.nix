@@ -65,6 +65,7 @@
     lazygit
     libnotify
     libreoffice-qt
+    licensor
     lsof
     lynx
     mc
