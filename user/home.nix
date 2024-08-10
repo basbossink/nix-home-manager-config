@@ -75,6 +75,7 @@
 		nawk
 		neovim
 		nerdfonts
+		nil
 		nload
 		noto-fonts
 		noto-fonts-color-emoji
