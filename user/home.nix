@@ -284,7 +284,10 @@
 		languages = {
 			language = [{
 				name = "nix";
-				indent = { tab-width = 2, unit = "\t" };
+				indent = { 
+					tab-width = 2; 
+					unit = "\t";
+				};
 			}];
 		};
 	};
@@ -296,6 +299,7 @@
 				email = email;
 				name = name;
 			};
+			ui.paginate = "never";		
 		};
 	};
 	
