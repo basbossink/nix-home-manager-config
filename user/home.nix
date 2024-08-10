@@ -281,6 +281,12 @@
         ];
       };
     };
+    languages = {
+      language = [{
+        name = "nix";
+        indent = { tab-width = 2, unit = "\t" };
+      }];
+    };
   };
 
   programs.jujutsu = {
