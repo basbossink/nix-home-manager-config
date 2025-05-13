@@ -23,6 +23,8 @@
       lib = nixpkgs.lib;
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      username = "bas";
+      hostName = "T495BBK";
       # Small tool to iterate over each systems
       eachSystem = f: nixpkgs.lib.genAttrs (import systems) (system: f nixpkgs.legacyPackages.${system});
 
@@ -31,15 +33,22 @@
     in
     {
       nixosConfigurations = {
-        T495BBK = lib.nixosSystem {
-          system = "x86_64-linux";
+        ${hostName} = lib.nixosSystem {
+          inherit system;
+          extraArgs = {
+            inherit hostName;
+            inherit username;
+          };
           modules = [ ./system/configuration.nix ];
         };
       };
 
       homeConfigurations = {
-        bas = home-manager.lib.homeManagerConfiguration {
+        ${username} = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
+          extraSpecialArgs = {
+            inherit username;
+          };
           modules = [ ./user/home.nix ];
         };
       };

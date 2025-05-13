@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, username, ... }:
 
 let
   editor = "hx";
@@ -6,7 +6,6 @@ let
   email = "bas.bossink@gmail.com";
   name = "Bas Bossink";
   ttl = 86400;
-  username = "bas";
 in
 {
   imports = [

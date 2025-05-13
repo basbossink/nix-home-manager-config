@@ -3,9 +3,9 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 {
-  config,
-  lib,
   pkgs,
+  hostName,
+  username,
   ...
 }:
 
@@ -21,7 +21,7 @@
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.requestEncryptionCredentials = true;
 
-  networking.hostName = "T495BBK"; # Define your hostname.
+  networking.hostName = hostName; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
@@ -93,7 +93,7 @@
   virtualisation.spiceUSBRedirection.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.bas = {
+  users.users.${username} = {
     isNormalUser = true;
     shell = pkgs.fish;
     initialPassword = "pw123";
