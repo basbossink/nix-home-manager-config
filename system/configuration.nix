@@ -2,13 +2,18 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -19,11 +24,14 @@
   networking.hostName = "T495BBK"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
   networking.hostId = "9ebff158";
-  
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nixpkgs.config.allowUnfree = true; 
+
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+  nixpkgs.config.allowUnfree = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
@@ -46,14 +54,13 @@
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
 
-
   # Enable the Plasma 6 Desktop Environment.
   services.desktopManager.plasma6.enable = true;
   # Enable SDDM, then enable Wayland support within SDDM(?)
   services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true; 
+  services.displayManager.sddm.wayland.enable = true;
   services.gvfs.enable = true;
-  services.blueman.enable = true; 
+  services.blueman.enable = true;
   # Configure keymap in X11
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
@@ -74,7 +81,7 @@
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
-  }; 
+  };
   hardware.sane.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -87,14 +94,20 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.bas = {
-     isNormalUser = true;
-     shell = pkgs.fish;
-     initialPassword = "pw123";
-     extraGroups = [ "wheel" "networkmanager" "scanner" "lp" "libvirtd" ]; # Enable ‘sudo’ for the user.
-  #   packages = with pkgs; [
-  #     firefox
-  #     tree
-  #   ];
+    isNormalUser = true;
+    shell = pkgs.fish;
+    initialPassword = "pw123";
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "scanner"
+      "lp"
+      "libvirtd"
+    ]; # Enable ‘sudo’ for the user.
+    #   packages = with pkgs; [
+    #     firefox
+    #     tree
+    #   ];
   };
 
   # List packages installed in system profile. To search, run:
@@ -167,4 +180,3 @@
   system.stateVersion = "23.11"; # Did you read the comment?
 
 }
-

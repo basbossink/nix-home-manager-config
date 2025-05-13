@@ -9,12 +9,14 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, ...}:
+  outputs =
+    { nixpkgs, home-manager, ... }:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-    in {
+    in
+    {
       nixosConfigurations = {
         T495BBK = lib.nixosSystem {
           system = "x86_64-linux";
