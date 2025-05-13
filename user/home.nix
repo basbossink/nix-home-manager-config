@@ -9,6 +9,7 @@
 		username = "bas";
 	in {
 		imports = [
+			(import ./packages.nix {inherit pkgs; })
 			(import ./programs.nix { inherit name email editor monospaceFont; })
 			(import ./services.nix { inherit ttl pkgs; })
 		];
@@ -37,121 +38,27 @@
 		# release notes.
 		home.stateVersion = "23.11"; # Please read the comment before changing.
 
+		# home.packages is defined in packages.nix.
 		# The home.packages option allows you to install Nix packages into your
 		# environment.
-		home.packages = with pkgs; [
-			alacritty
-			android-file-transfer
-			bat
-			bottom-rs
-			bluez
-			bluez-tools
-			coreutils-full
-			cups
-			cups-filters
-			dejavu_fonts
-			erlang
-			espanso
-			evince
-			eza
-			fd
-			ffmpeg-full
-			filezilla
-			firefox
-			fish
-			gawk
-			ghostty
-			git
-			gleam
-			gnupg
-			gnused
-			handbrake
-			helix
-			htop
-			hunspell
-			hunspellDicts.en_US-large
-			hunspellDicts.nl_nl
-			imagemagick
-			iosevka
-			jackett
-			jetbrains-mono
-			jmtpfs
-			kdePackages.bluez-qt
-			kdePackages.kdeconnect-kde
-			kitty
-			krusader
-			lazygit
-			libnotify
-			libreoffice-qt
-			libsForQt5.bluez-qt
-			lsof
-			lua5_4_compat
-			lynx
-			mc
-			meld
-			mg
-			miller
-			mpc-cli
-			mpd
-			mpv
-			nawk
-			ncmpcpp
-			neovim
-			nil
-			nload
-			noto-fonts
-			noto-fonts-color-emoji
-			pandoc
-			pass
-			pinentry-qt
-			pomodoro
-			poppler_utils
-			rclone
-			rclone-browser
-			rebar3
-			recutils
-			redshift
-			redshift-plasma-applet
-			ripgrep
-			ripgrep-all
-		  roboto
-			rofi
-			ruplacer
-			sd
-			super-productivity
-			taplo-cli
-			taplo-lsp
-			texliveFull
-			udiskie
-			unzip
-			vlc
-			watchexec
-			xsel
-			yazi
-			yt-dlp
-			zathura
-			zellij
-			zig
-			zls
-			zoxide
-		
-			# # Adds the 'hello' command to your environment. It prints a friendly
-			# # "Hello, world!" when run.
-			# pkgs.hello
+		# home.packages = with pkgs; [
+		# 	 # Adds the 'hello' command to your environment. It prints a friendly
+		# 	 # "Hello, world!" when run.
+		# 	 pkgs.hello
 
-			# # It is sometimes useful to fine-tune packages, for example, by applying
-			# # overrides. You can do that directly here, just don't forget the
-			# # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-			# # fonts?
-			# (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+		# 	 # It is sometimes useful to fine-tune packages, for example, by applying
+		# 	 # overrides. You can do that directly here, just don't forget the
+		# 	 # parentheses. Maybe you want to install Nerd Fonts with a limited number of
+		# 	 # fonts?
+		# 	 (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
-			# # You can also create simple shell scripts directly inside your
-			# # configuration. For example, this adds a command 'my-hello' to your
-			# # environment:
-			# (pkgs.writeShellScriptBin "my-hello" ''
-			#		echo "Hello, ${config.home.username}!"
-			# '')
-		];
+		# 	 # You can also create simple shell scripts directly inside your
+		# 	 # configuration. For example, this adds a command 'my-hello' to your
+		# 	 # environment:
+		# 	 (pkgs.writeShellScriptBin "my-hello" ''
+		# 			echo "Hello, ${config.home.username}!"
+		# 	 '')
+		# ];
 
 		# Home Manager is pretty good at managing dotfiles. The primary way to manage
 		# plain files is through 'home.file'.
