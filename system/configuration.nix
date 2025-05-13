@@ -43,37 +43,54 @@
   services.udisks2.enable = true;
   services.zfs.autoScrub.enable = true;
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
 
 
-  # Enable the Plasma 5 Desktop Environment.
+  # Enable the Plasma 6 Desktop Environment.
+  services.desktopManager.plasma6.enable = true;
+  # Enable SDDM, then enable Wayland support within SDDM(?)
   services.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
-  
-
+  services.displayManager.sddm.wayland.enable = true; 
+  services.gvfs.enable = true;
+  services.blueman.enable = true; 
   # Configure keymap in X11
-  services.xserver.xkb.layout = "us";
-  services.xserver.xkb.variant = "dvorak";
-  services.xserver.xkb.options = "ctrl:nocaps";
+  # Enable the X11 windowing system.
+  # services.xserver.enable = true;
+  # services.xserver.xkb.layout = "us";
+  # services.xserver.xkb.variant = "dvorak";
+  # services.xserver.xkb.options = "ctrl:nocaps";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
   services.printing.drivers = [ pkgs.cnijfilter2 ];
 
   # Enable sound.
-  hardware.pulseaudio.enable = true;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
+  }; 
   hardware.sane.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
+
+  # Enable virtualisation
+  programs.virt-manager.enable = true;
+  virtualisation.libvirtd.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.bas = {
      isNormalUser = true;
      shell = pkgs.fish;
      initialPassword = "pw123";
-     extraGroups = [ "wheel" "networkmanager" "scanner" "lp"]; # Enable ‘sudo’ for the user.
+     extraGroups = [ "wheel" "networkmanager" "scanner" "lp" "libvirtd" ]; # Enable ‘sudo’ for the user.
   #   packages = with pkgs; [
   #     firefox
   #     tree
@@ -87,7 +104,6 @@
     wget
     sane-backends
     sane-frontends
-    xsane
   ];
 
   programs.fish.enable = true;
@@ -105,11 +121,28 @@
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  # networking.firewall.allowedTCPPorts = [ 21 22 ];
+  # networking.firewall.allowedUDPPorts = [ 21 22 ];
   # Or disable the firewall altogether.
   networking.firewall.enable = true;
-
+  # services.openssh = {
+  #   enable = true;
+  #   ports = [ 22 ];
+  #   allowSFTP = true;
+  #   listenAddresses = [
+  #     {
+  #       addr = "192.168.1.79";
+  #       port = 22;
+  #     }
+  #   ];
+  #   settings = {
+  #     PasswordAuthentication = true;
+  #     AllowUsers = ["bas"]; # Allows all users by default. Can be [ "user1" "user2" ]
+  #     UseDns = true;
+  #     X11Forwarding = false;
+  #     PermitRootLogin = "no"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
+  #   };
+  # };
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.

@@ -9,8 +9,8 @@
     };
   };
 
-  outputs = {self, nixpkgs, home-manager, ...}: 
-    let 
+  outputs = { nixpkgs, home-manager, ...}:
+    let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -28,5 +28,5 @@
           modules = [ ./user/home.nix ];
         };
       };
-    }; 
+    };
 }
